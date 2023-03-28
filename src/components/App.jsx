@@ -31,7 +31,6 @@ export class App extends Component {
     }))
   }
 
-
   removeContact = (id) => {
     this.setState({
       contacts: this.state.contacts.filter(contact => contact.id !== id),
@@ -44,21 +43,29 @@ export class App extends Component {
     })
   }
 
-
-  render() {
+  getFilteredContacts = () => {
     const normalizedFilter = this.state.filter.toLowerCase();
-    const visibleContacts = this.state.contacts.filter(contact =>
+
+    return this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     )
+  }
+
+  
+
+
+  render() {
+    const { contacts, filter } = this.state;
+    const visibleContacts = this.getFilteredContacts;
 
 
     return (
       <Section>
         
-        <ContactsForm onSubmit={this.createContact} contacts={this.state.contacts} />
+        <ContactsForm onSubmit={this.createContact} contacts={contacts} />
 
         <Title text="Contacts" />
-        <ContactsFilter filter={this.state.filter} onChangeFilter={this.handelChangeFilter} />
+        <ContactsFilter filter={filter} onChangeFilter={this.handelChangeFilter} />
         <ContactsList contacts={visibleContacts} onRemoveClick={this.removeContact} />
       </Section>
     );

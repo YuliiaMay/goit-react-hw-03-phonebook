@@ -20,7 +20,6 @@ class ContactsForm extends Component {
 
         const { name, number } = this.state;
         const { contacts } = this.props;
-
         
         if (contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())) {
             return alert(`${name} is already in contacts.`);
@@ -32,7 +31,6 @@ class ContactsForm extends Component {
                 name: name,
                 number: number
         });
-
 
         this.reset();
     }
